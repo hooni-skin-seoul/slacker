@@ -9,6 +9,24 @@ export async function getLatestPost() {
   return json as number;
 }
 
+export async function getNewStories(limit: number = 30) {
+  /* get latest new stories from hacker news */
+  const res = await fetch(
+    `https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty`
+  );
+  const json = await res.json();
+  return (json as number[]).slice(0, limit);
+}
+
+export async function getTopStories(limit: number = 30) {
+  /* get top stories from hacker news */
+  const res = await fetch(
+    `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty`
+  );
+  const json = await res.json();
+  return (json as number[]).slice(0, limit);
+}
+
 export async function getPost(id: number) {
   /* get post data using its id from hacker news */
   const run = async () => {
