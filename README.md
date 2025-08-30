@@ -39,7 +39,7 @@
 <picture>
    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/28986134/221011048-524226f6-b9aa-4f64-b39e-70267ed8eb37.png">
    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/28986134/221011121-c6f368b6-cbff-4b67-a0ee-ffc7986d9add.png">
-   <img alt="Slacker Overview" src="https://user-images.githubusercontent.com/28986134/221011121-c6f368b6-cbff-4b67-a0ee-ffc7986d9add.png">
+   <img alt="Slacker Overview" src="https://user-images.githubusercontent.com/28986134/221011121-c6f368b6-cbff-4b67-a0ee-ffc7986d9add.png"> 
 </picture>
 
 ## One-Click Install
