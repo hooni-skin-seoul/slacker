@@ -5,7 +5,7 @@ import {
   checkIfPostWasChecked,
   getTeamsAndKeywords,
 } from "./upstash";
-import { equalsIgnoreOrder, postScanner } from "./helpers";
+import { equalsIgnoreOrder, postScanner  } from "./helpers";
 import { sendSlackMessage } from "./slack";
 
 export async function cron() {
@@ -36,16 +36,16 @@ export async function cron() {
       console.log(`Hacker News post not found. Post number: ${i}`); // by the off chance that the post fails to fetch/doesn't exist, log it
       continue;
     }
-    if (post.deleted) {
-      continue; // if post is deleted, skip it
+    if (post.deleted || post.type !== "story" || !post?.url) {
+      continue; // if post is deleted or not a story (skip comments), skip it
     }
-    console.log("checking for keywords in post", i);
+    console.log("checking for keywords in story", i);
     const interestedTeams = Array.from(scanner(post)); // get teams that are interested in this post
     if (interestedTeams.length > 0) {
       results[i] = interestedTeams; // add post id and interested teams to results
       await Promise.all(
         interestedTeams.map(async (teamId) => {
-          console.log("sending post to team", teamId);
+          console.log("sending story to team", teamId);
           try {
             await sendSlackMessage(i, teamId); // send post to team
           } catch (e) {
