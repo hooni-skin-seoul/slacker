@@ -1,4 +1,4 @@
-import { getLatestPost, getPost, getNewStories } from "./hn";
+import { getLatestPost, getPost, getNewStories, getTopStories } from "./hn";
 import {
   getLastCheckedId,
   setLastCheckedId,
@@ -10,7 +10,7 @@ import { sendSlackMessage } from "./slack";
 
 export async function cron() {
   // Get latest new stories from Hacker News (more efficient than checking all posts)
-  const newStoryIds = await getNewStories(50); // Get latest 50 new stories
+  const newStoryIds = await getTopStories(10); // Get top 10 new stories
   
   const teamsAndKeywords = await getTeamsAndKeywords(); // get all team keys from redis
   const scanner = postScanner(teamsAndKeywords); // create a post scanner that contains all teams and their keywords in a constructed regex
